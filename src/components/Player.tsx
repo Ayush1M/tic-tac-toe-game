@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 
 type PlayerProp = {
     name : string,
@@ -6,14 +6,30 @@ type PlayerProp = {
 }
 
 const Player : FC<PlayerProp> = ({name, symbol}) => {
+
+    const [isEditing, setIsEditing] = useState<boolean>(false)
+    const [playerName, setPlayerName] = useState<string>(name)
+
+    const handleClick = () => {
+        setIsEditing(prevState => !prevState)
+    }
+
+    const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
+        setPlayerName(e.target.value)
+    }
+
     return (
+        <>
         <ul>
             <li>
-                <span>{name}</span>
+                {isEditing ? 
+                <input type="text" value={playerName} required  onChange={handleChange}/> : 
+                <span>{playerName}</span>}
                 <span>{symbol}</span>
-                <button className="ml-4">edit</button>
             </li>
         </ul>
+            <button className="ml-4" onClick={handleClick}>{isEditing ? "save" : "edit" }</button>
+        </>
     )
 }
 
