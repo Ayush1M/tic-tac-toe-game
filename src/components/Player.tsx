@@ -2,10 +2,11 @@ import { ChangeEvent, FC, useState } from "react";
 
 type PlayerProp = {
     name : string,
-    symbol : string
+    symbol : string,
+    isActive : boolean
 }
 
-const Player : FC<PlayerProp> = ({name, symbol}) => {
+const Player : FC<PlayerProp> = ({name, symbol, isActive}) => {
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [playerName, setPlayerName] = useState<string>(name)
@@ -21,7 +22,7 @@ const Player : FC<PlayerProp> = ({name, symbol}) => {
     return (
         <>
         <ul>
-            <li>
+            <li className={`${isActive ? "border-2 border-yellow-500" : undefined}`}>
                 {isEditing ? 
                 <input type="text" value={playerName} required  onChange={handleChange}/> : 
                 <span>{playerName}</span>}

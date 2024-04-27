@@ -6,17 +6,24 @@ const initialGameBoard  = [
     [null, null, null]
 ]
 
+type gameBoardProp = {
+    handleSelectSquare : () => void,
+    activePlayer : string
+}
 
-const GameBoard : FC = () => {
+
+const GameBoard : FC<gameBoardProp> = ({ handleSelectSquare, activePlayer }) => {
     const [gameBoard, setGameBoard] = useState(initialGameBoard)
 
 
     const handleSelect = (rowIndex : number, colIndex: number) => {
         setGameBoard(prevGameBoard => {
             const updatedGameBoard : any = [...prevGameBoard.map(arr => [...arr])]
-            updatedGameBoard[rowIndex][colIndex] = "X"
+            updatedGameBoard[rowIndex][colIndex] = activePlayer
             return updatedGameBoard
         })
+
+        handleSelectSquare()
     }
 
     return (
