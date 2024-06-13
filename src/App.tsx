@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Player from "./components/Player"
 import GameBoard from "./components/GameBoard"
 import { useState } from "react"
+import Log from "./components/Log"
 
 const initialGameBoard : (string | null)[][] = [
     ["", "", ""],
@@ -10,12 +11,12 @@ const initialGameBoard : (string | null)[][] = [
     ["", "", ""]
 ]
 
-type gameTurnProp = {
+export type gameTurnProp = {
+    player : string,
     square : {
         row : number,
         col : number
-    },
-    player : string,
+    }
 }
 
 export default function App(){
@@ -60,8 +61,7 @@ export default function App(){
         <Player name="player-2" symbol="O" isActive={activePlayer === "O"}/>
         </div>
         <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
+        <Log gameTurns = {gameTurns}/>
         </main>
     )
 }
-
-
