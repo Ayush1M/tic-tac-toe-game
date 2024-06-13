@@ -4,12 +4,50 @@ import Player from "./components/Player"
 import GameBoard from "./components/GameBoard"
 import { useState } from "react"
 
+const initialGameBoard : (string | null)[][] = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+]
+
+type gameTurnProp = {
+    square : {
+        row : number,
+        col : number
+    },
+    player : string,
+}
+
 export default function App(){
 
     const [activePlayer, setActivePlayer] = useState<string>("X")
+    const [gameTurns, setGameTurns] = useState<gameTurnProp[]>([])
 
-    const handleSelectSquare = () => {
+    let gameBoard = [...initialGameBoard.map((arr) => [...arr])]
+
+    for (const turn of gameTurns){
+        const {square, player} = turn
+        const {row, col} = square 
+    
+        gameBoard[row][col] = player !== "" ? player : null
+      }
+
+    const handleSelectSquare = (rowIndex : number, colIndex : number) => {
         setActivePlayer(prevState => prevState === "X" ? "O" : "X")
+
+        setGameTurns(prevTurns => {
+            let currentPlayer = "X"
+
+            if(prevTurns.length > 0 && prevTurns[0].player === "X"){
+                currentPlayer = "O"
+            }
+
+            const updatedTurns = [
+                {square : {row : rowIndex, col : colIndex}, player : currentPlayer },
+                ...prevTurns,
+            ]
+            return updatedTurns
+        })
     }
 
     return(
@@ -21,7 +59,7 @@ export default function App(){
         <Player name="player-1" symbol="X" isActive={activePlayer === "X"}/>
         <Player name="player-2" symbol="O" isActive={activePlayer === "O"}/>
         </div>
-        <GameBoard handleSelectSquare={handleSelectSquare} activePlayer={activePlayer}/>
+        <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
         </main>
     )
 }

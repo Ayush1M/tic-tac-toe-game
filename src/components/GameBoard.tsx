@@ -1,30 +1,12 @@
-import { FC, useState } from "react";
-
-const initialGameBoard  = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null]
-]
+import { FC } from "react";
 
 type gameBoardProp = {
-    handleSelectSquare : () => void,
-    activePlayer : string
+    handleSelectSquare : (rowIndex : number, colIndex : number) => void,
+    gameBoard : (string | null)[][]
 }
 
 
-const GameBoard : FC<gameBoardProp> = ({ handleSelectSquare, activePlayer }) => {
-    const [gameBoard, setGameBoard] = useState(initialGameBoard)
-
-
-    const handleSelect = (rowIndex : number, colIndex: number) => {
-        setGameBoard(prevGameBoard => {
-            const updatedGameBoard : any = [...prevGameBoard.map(arr => [...arr])]
-            updatedGameBoard[rowIndex][colIndex] = activePlayer
-            return updatedGameBoard
-        })
-
-        handleSelectSquare()
-    }
+const GameBoard : FC<gameBoardProp> = ({ handleSelectSquare, gameBoard }) => {
 
     return (
         <ul className="flex flex-wrap justify-center gap-4">
@@ -33,7 +15,7 @@ const GameBoard : FC<gameBoardProp> = ({ handleSelectSquare, activePlayer }) => 
                 <ul key={colIndex}>
                     <li key={colIndex}>
                     <button className="w-36 h-36 bg-black text-white" 
-                    onClick={() => handleSelect(rowIndex, colIndex)}>{col}</button>
+                    onClick={() => handleSelectSquare(rowIndex, colIndex)}>{col}</button>
                 </li>
                 </ul> )}
             </li> )}
