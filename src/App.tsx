@@ -19,12 +19,25 @@ export type gameTurnProp = {
     }
 }
 
-export default function App(){
+type turnProp = {
+    player : string
+}
 
-    const [activePlayer, setActivePlayer] = useState<string>("X")
+function derivedActivePlayer(gameTurns : turnProp[]){
+    let currentPlayer = "X"
+
+    if(gameTurns.length > 0 && gameTurns[0].player === "X"){
+        currentPlayer = "O"
+    }
+    return currentPlayer
+}
+
+export default function App(){
     const [gameTurns, setGameTurns] = useState<gameTurnProp[]>([])
 
     let gameBoard = [...initialGameBoard.map((arr) => [...arr])]
+
+    const activePlayer = derivedActivePlayer(gameTurns)
 
     for (const turn of gameTurns){
         const {square, player} = turn
@@ -34,10 +47,9 @@ export default function App(){
       }
 
     const handleSelectSquare = (rowIndex : number, colIndex : number) => {
-        setActivePlayer(prevState => prevState === "X" ? "O" : "X")
 
         setGameTurns(prevTurns => {
-            let currentPlayer = "X"
+            let currentPlayer = derivedActivePlayer(prevTurns)
 
             if(prevTurns.length > 0 && prevTurns[0].player === "X"){
                 currentPlayer = "O"
