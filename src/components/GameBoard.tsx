@@ -15,7 +15,8 @@ const GameBoard : FC<gameBoardProp> = ({ handleSelectSquare, gameBoard }) => {
                 <ul key={colIndex}>
                     <li key={colIndex}>
                     <button className="w-36 h-36 bg-black text-white" 
-                    onClick={() => handleSelectSquare(rowIndex, colIndex)}>{col}</button>
+                    onClick={() => handleSelectSquare(rowIndex, colIndex)}
+                    disabled={col !== ""}>{col}</button>
                 </li>
                 </ul> )}
             </li> )}
