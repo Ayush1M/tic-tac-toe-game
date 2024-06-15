@@ -4,6 +4,7 @@ import Player from "./components/Player"
 import GameBoard from "./components/GameBoard"
 import { useState } from "react"
 import Log from "./components/Log"
+import { WINNING_COMBINATIONS } from "./components/data.js"
 
 const initialGameBoard : (string | null)[][] = [
     ["", "", ""],
@@ -44,7 +45,19 @@ export default function App(){
         const {row, col} = square 
     
         gameBoard[row][col] = player !== "" ? player : null
-      }
+    }
+
+    let winner
+
+    for (const combination of WINNING_COMBINATIONS){
+        const first = gameBoard[combination[0].row][combination[0].column]
+        const second = gameBoard[combination[1].row][combination[1].column]
+        const third = gameBoard[combination[2].row][combination[2].column]
+
+        if(first && first === second && first === third){
+            winner = first
+        }
+    }
 
     const handleSelectSquare = (rowIndex : number, colIndex : number) => {
 
@@ -72,6 +85,7 @@ export default function App(){
         <Player name="player-1" symbol="X" isActive={activePlayer === "X"}/>
         <Player name="player-2" symbol="O" isActive={activePlayer === "O"}/>
         </div>
+        {winner && <h2>you won, {winner}</h2> }
         <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
         <Log gameTurns = {gameTurns}/>
         </main>
