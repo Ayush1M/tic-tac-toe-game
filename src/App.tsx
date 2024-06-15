@@ -49,6 +49,7 @@ export default function App(){
     }
 
     let winner !: string
+    const isDraw = gameTurns.length === 9 && !winner
 
     for (const combination of WINNING_COMBINATIONS){
         const first = gameBoard[combination[0].row][combination[0].column]
@@ -77,6 +78,10 @@ export default function App(){
         })
     }
 
+    const reset = () =>{
+        setGameTurns([])
+    }
+
     return(
         <main>
         <Header image = {{src : headerImage, alt : "logo image of the game"}}>
@@ -88,7 +93,7 @@ export default function App(){
         </div>
         {winner && <h2>you won, {winner}</h2> }
         <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
-        {winner && <GameOver winner={winner}/>}
+        {(winner || isDraw) && <GameOver winner={winner} reset={reset}/>}
         <Log gameTurns = {gameTurns}/>
         </main>
     )
