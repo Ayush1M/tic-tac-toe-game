@@ -5,6 +5,7 @@ import GameBoard from "./components/GameBoard"
 import { useState } from "react"
 import Log from "./components/Log"
 import { WINNING_COMBINATIONS } from "./components/data.js"
+import GameOver from "./components/GameOver.js"
 
 const initialGameBoard : (string | null)[][] = [
     ["", "", ""],
@@ -47,7 +48,7 @@ export default function App(){
         gameBoard[row][col] = player !== "" ? player : null
     }
 
-    let winner
+    let winner !: string
 
     for (const combination of WINNING_COMBINATIONS){
         const first = gameBoard[combination[0].row][combination[0].column]
@@ -87,6 +88,7 @@ export default function App(){
         </div>
         {winner && <h2>you won, {winner}</h2> }
         <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
+        {winner && <GameOver winner={winner}/>}
         <Log gameTurns = {gameTurns}/>
         </main>
     )
