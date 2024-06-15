@@ -25,6 +25,11 @@ type turnProp = {
     player : string
 }
 
+type playerNamesProp = {
+    "X" : string,
+    "O" : string
+}
+
 function derivedActivePlayer(gameTurns : turnProp[]){
     let currentPlayer = "X"
 
@@ -35,6 +40,10 @@ function derivedActivePlayer(gameTurns : turnProp[]){
 }
 
 export default function App(){
+    const [playerNameChange, setPlayerNameChange] = useState<playerNamesProp>({
+        "X" : "Player 1",
+        "O" : "Player 2"
+    })
     const [gameTurns, setGameTurns] = useState<gameTurnProp[]>([])
 
     let gameBoard = [...initialGameBoard.map((arr) => [...arr])]
@@ -57,7 +66,7 @@ export default function App(){
         const third = gameBoard[combination[2].row][combination[2].column]
 
         if(first && first === second && first === third){
-            winner = first
+            winner = playerNameChange[first as keyof playerNamesProp]
         }
     }
 
@@ -78,6 +87,15 @@ export default function App(){
         })
     }
 
+    const handleNameChange = (symbol : string, newPlayerName : string) =>{
+        setPlayerNameChange(prevPlayer => {
+            return {
+                ...prevPlayer,
+                [symbol] : [newPlayerName]
+            }
+        })
+    }
+
     const reset = () =>{
         setGameTurns([])
     }
@@ -88,8 +106,18 @@ export default function App(){
             <h2>Tic Tac Toe</h2>
         </Header>
         <div className="flex mx-auto">
-        <Player name="player-1" symbol="X" isActive={activePlayer === "X"}/>
-        <Player name="player-2" symbol="O" isActive={activePlayer === "O"}/>
+        <Player 
+        name="player-1" 
+        symbol="X" 
+        isActive={activePlayer === "X"}
+        handleNameChange = {handleNameChange}
+        />
+        <Player 
+        name="player-2" 
+        symbol="O" 
+        isActive={activePlayer === "O"}
+        handleNameChange = {handleNameChange}
+        />
         </div>
         {winner && <h2>you won, {winner}</h2> }
         <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />

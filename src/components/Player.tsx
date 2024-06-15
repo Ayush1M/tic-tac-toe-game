@@ -4,15 +4,19 @@ type PlayerProp = {
     name : string,
     symbol : string,
     isActive : boolean
+    handleNameChange : (symbol : string , playerName: string) => void
 }
 
-const Player : FC<PlayerProp> = ({name, symbol, isActive}) => {
+const Player : FC<PlayerProp> = ({name, symbol, isActive, handleNameChange}) => {
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [playerName, setPlayerName] = useState<string>(name)
 
     const handleClick = () => {
         setIsEditing(prevState => !prevState)
+        if(isEditing){
+            handleNameChange(symbol, playerName)    
+        }
     }
 
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
