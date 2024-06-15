@@ -39,6 +39,21 @@ function derivedActivePlayer(gameTurns : turnProp[]){
     return currentPlayer
 }
 
+function derivedWinner(gameBoard : (string | null)[][], playerNameChange : playerNamesProp){
+    let winner !: string
+
+    for (const combination of WINNING_COMBINATIONS){
+        const first = gameBoard[combination[0].row][combination[0].column]
+        const second = gameBoard[combination[1].row][combination[1].column]
+        const third = gameBoard[combination[2].row][combination[2].column]
+
+        if(first && first === second && first === third){
+            winner = playerNameChange[first as keyof playerNamesProp]
+        }
+    }
+    return winner
+}
+
 export default function App(){
     const [playerNameChange, setPlayerNameChange] = useState<playerNamesProp>({
         "X" : "Player 1",
@@ -57,19 +72,10 @@ export default function App(){
         gameBoard[row][col] = player !== "" ? player : null
     }
 
-    let winner !: string
+    const winner = derivedWinner(gameBoard, playerNameChange)
     const isDraw = gameTurns.length === 9 && !winner
 
-    for (const combination of WINNING_COMBINATIONS){
-        const first = gameBoard[combination[0].row][combination[0].column]
-        const second = gameBoard[combination[1].row][combination[1].column]
-        const third = gameBoard[combination[2].row][combination[2].column]
-
-        if(first && first === second && first === third){
-            winner = playerNameChange[first as keyof playerNamesProp]
-        }
-    }
-
+   
     const handleSelectSquare = (rowIndex : number, colIndex : number) => {
 
         setGameTurns(prevTurns => {
