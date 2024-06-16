@@ -24,17 +24,27 @@ const Player : FC<PlayerProp> = ({name, symbol, isActive, handleNameChange}) => 
     }
 
     return (
-        <>
-        <ul>
-            <li className={`${isActive ? "border-2 border-yellow-500" : undefined}`}>
+        <div className="mr-8 flex justify-center items-center w-full">
+        <ul className="w-80">
+            <li className={`${isActive ? "border-2 border-yellow-500 p-2 px-8 flex justify-between" : "flex justify-between"}`}>
                 {isEditing ? 
-                <input type="text" value={playerName} required  onChange={handleChange}/> : 
-                <span>{playerName}</span>}
-                <span>{symbol}</span>
+                <input 
+                type="text" 
+                value={playerName} 
+                required  
+                onChange={handleChange} 
+                className="w-36 p-1 rounded-lg mr-4"
+                /> : 
+                <span className="text-2xl text-primary-two">{playerName}</span>}
+                <span className="text-2xl text-primary-two">{symbol}</span>
             </li>
         </ul>
-            <button className="ml-4" onClick={handleClick}>{isEditing ? "save" : "edit" }</button>
-        </>
+            <button 
+            className="ml-4 bg-primary-two px-4 py-2 text-lg rounded-lg" 
+            onClick={handleClick}>
+                {isEditing ? "save" : "edit" }
+            </button>
+        </div>
     )
 }
 

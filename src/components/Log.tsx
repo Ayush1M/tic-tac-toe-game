@@ -9,7 +9,7 @@ const Log : FC<LogProps> = ({gameTurns}) => {
     return (
         <ul>
             {gameTurns.map((turn) =>
-                <li key={`${turn.square.row}${turn.square.col}`}> 
+                <li key={`${turn.square.row}${turn.square.col}`} className="text-white text-2xl"> 
                 {turn.player} selected {turn.square.col},{turn.square.row} 
                 </li>)}
         </ul>
