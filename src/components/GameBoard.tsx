@@ -9,12 +9,12 @@ type gameBoardProp = {
 const GameBoard : FC<gameBoardProp> = ({ handleSelectSquare, gameBoard }) => {
 
     return (
-        <ul className="flex flex-wrap justify-center gap-4">
+        <ul className="flex justify-center">
             {gameBoard.map((row, rowIndex) => <li key={rowIndex}>
                 {row.map((col, colIndex) => 
                 <ul key={colIndex}>
-                    <li key={colIndex}>
-                    <button className="w-36 h-36 bg-black text-white" 
+                    <li className="flex border-white border-2">
+                    <button className="w-36 h-36 text-white text-8xl bg-primary-one" 
                     onClick={() => handleSelectSquare(rowIndex, colIndex)}
                     disabled={col !== ""}>{col}</button>
                 </li>

@@ -11,8 +11,8 @@ type HeaderProp = {
 const Header : FC<HeaderProp> = ({children, image}) => {
     return (
         <header className="flex flex-col justify-center items-center">
-            <img src={image.src} alt={image.alt} className="w-28" />
-            <div className="text-4xl mt-4 font-bold">{children}</div>
+            <img src={image.src} alt={image.alt} className="w-28 mt-4" />
+            {children}
         </header>
     )
 

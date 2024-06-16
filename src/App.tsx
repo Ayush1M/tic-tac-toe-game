@@ -107,11 +107,11 @@ export default function App(){
     }
 
     return(
-        <main>
+        <main className="flex flex-col bg-bg-clr min-h-screen font-body">
         <Header image = {{src : headerImage, alt : "logo image of the game"}}>
-            <h2>Tic Tac Toe</h2>
+            <h2 className="text-4xl mt-8 font-bold animate-bounce text-primary-two">Tic Tac Toe</h2>
         </Header>
-        <div className="flex mx-auto">
+        <div className="flex mx-auto my-8">
         <Player 
         name="player-1" 
         symbol="X" 
@@ -125,10 +125,16 @@ export default function App(){
         handleNameChange = {handleNameChange}
         />
         </div>
-        {winner && <h2>you won, {winner}</h2> }
-        <GameBoard handleSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
+            
         {(winner || isDraw) && <GameOver winner={winner} reset={reset}/>}
+
+        <div className="flex justify-evenly">
+        <GameBoard 
+        handleSelectSquare={handleSelectSquare} 
+        gameBoard={gameBoard} />
+
         <Log gameTurns = {gameTurns}/>
+        </div>
         </main>
     )
 }

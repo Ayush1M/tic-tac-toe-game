@@ -12,7 +12,7 @@ const GameOver: FC<GameOverProps> = ({winner, reset}) => {
         <h2>Game Over!!!</h2>
         {winner && <p className="my-10">{winner}, Won</p>}
         {!winner && <p className="my-10">It's a draw</p>}
-        <button className="p-8 text-primary-two text-white bg-black rounded-lg hover:opacity-80" onClick={reset}>Play Again</button>
+        <button className="p-8 text-primary-two bg-black rounded-lg hover:opacity-80" onClick={reset}>Play Again</button>
         </div>
         </div>
     )
