@@ -7,9 +7,9 @@ type LogProps = {
 
 const Log : FC<LogProps> = ({gameTurns}) => {
     return (
-        <ul>
+        <ul className="mt-12">
             {gameTurns.map((turn) =>
-                <li key={`${turn.square.row}${turn.square.col}`} className="text-white text-2xl"> 
+                <li key={`${turn.square.row}${turn.square.col}`} className="text-white text-2xl max-lg:text-center"> 
                 {turn.player} selected {turn.square.col},{turn.square.row} 
                 </li>)}
         </ul>

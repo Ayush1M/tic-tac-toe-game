@@ -11,10 +11,14 @@ export default {
       "body" : ["Oswald", "sans-serif"]
     },
     extend: {
+      screens : {
+        'lg' : '1000px'
+      },
       colors : {
         "bg-clr" : "#192a32",
         "primary-one" : "#1f3540",
-        "primary-two" : "#a8bec9" 
+        "primary-two" : "#a8bec9",
+        "hover" : "#262626"
       },
       keyframes : {
         pop : {

@@ -107,11 +107,11 @@ export default function App(){
     }
 
     return(
-        <main className="bg-bg-clr min-h-screen font-body">
+        <main className="bg-bg-clr min-h-screen font-body max-lg:min-w-max">
         <Header image = {{src : headerImage, alt : "logo image of the game"}}>
             <h2 className="text-4xl mt-8 font-bold animate-bounce text-primary-two">Tic Tac Toe</h2>
         </Header>
-        <div className="flex mx-auto my-8">
+        <div className="flex mx-auto my-8 max-lg:flex max-lg:flex-col">
         <Player 
         name="player-1" 
         symbol="X" 
@@ -128,7 +128,7 @@ export default function App(){
             
         {(winner || isDraw) && <GameOver winner={winner} reset={reset}/>}
 
-        <div className="flex justify-evenly">
+        <div className="flex justify-evenly max-lg:flex max-lg:flex-col">
         <GameBoard 
         handleSelectSquare={handleSelectSquare} 
         gameBoard={gameBoard} />
