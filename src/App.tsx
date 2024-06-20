@@ -107,7 +107,7 @@ export default function App(){
     }
 
     return(
-        <main className="flex flex-col bg-bg-clr min-h-screen font-body">
+        <main className="bg-bg-clr min-h-screen font-body">
         <Header image = {{src : headerImage, alt : "logo image of the game"}}>
             <h2 className="text-4xl mt-8 font-bold animate-bounce text-primary-two">Tic Tac Toe</h2>
         </Header>
