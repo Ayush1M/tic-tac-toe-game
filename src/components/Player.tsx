@@ -4,17 +4,18 @@ type PlayerProp = {
     name : string,
     symbol : string,
     isActive : boolean
-    handleNameChange : (symbol : string , playerName: string) => void
+    handleNameChange : (symbol : string , playerName: string) => void,
+    isGameOver : boolean
 }
 
-const Player : FC<PlayerProp> = ({name, symbol, isActive, handleNameChange}) => {
+const Player : FC<PlayerProp> = ({name, symbol, isActive, handleNameChange, isGameOver}) => {
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [playerName, setPlayerName] = useState<string>(name)
 
     const handleClick = () => {
         setIsEditing(prevState => !prevState)
-        if(isEditing){
+        if(isEditing && isGameOver){
             handleNameChange(symbol, playerName)    
         }
     }
@@ -41,7 +42,8 @@ const Player : FC<PlayerProp> = ({name, symbol, isActive, handleNameChange}) => 
         </ul>
             <button 
             className="ml-4 bg-primary-two px-4 py-2 text-lg rounded-lg" 
-            onClick={handleClick}>
+            onClick={handleClick}
+            disabled={isGameOver}>
                 {isEditing ? "save" : "edit" }
             </button>
         </div>

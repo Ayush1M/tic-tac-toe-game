@@ -119,12 +119,14 @@ export default function App(){
         symbol="X" 
         isActive={activePlayer === "X"}
         handleNameChange = {handleNameChange}
+        isGameOver={isGameOver}
         />
         <Player 
         name="player-2" 
         symbol="O" 
         isActive={activePlayer === "O"}
         handleNameChange = {handleNameChange}
+        isGameOver={isGameOver}
         />
         </div>
             
@@ -134,7 +136,7 @@ export default function App(){
         <GameBoard 
         handleSelectSquare={handleSelectSquare} 
         gameBoard={gameBoard} />
-        
+
         <Log gameTurns = {gameTurns}/>
         </div>
         </main>
