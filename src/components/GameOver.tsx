@@ -7,7 +7,7 @@ type GameOverProps = {
 
 const GameOver: FC<GameOverProps> = ({winner, reset}) => {
     return(
-        <div className="bg-yellow-500 w-9/12 h-5/6 fixed top-24 right-60 -translate-x-1/2 -translate-y-1/2 opacity-90 rounded-lg animate-pop-in max-lg:w-screen max-lg:h-screen max-lg:top-0 max-lg:left-0">
+        <div className="bg-yellow-500 w-6/12 h-4/6 fixed top-24 right-96 -translate-x-1/2 -translate-y-1/2 opacity-90 rounded-lg animate-pop-in max-lg:top-0 max-lg:left-0">
         <div className="flex flex-col items-center min-h-full justify-center text-4xl">
         <h2>Game Over!!!</h2>
         {winner && <p className="my-10">{winner}, Won</p>}

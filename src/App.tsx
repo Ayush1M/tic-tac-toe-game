@@ -74,9 +74,11 @@ export default function App(){
 
     const winner = derivedWinner(gameBoard, playerNameChange)
     const isDraw = gameTurns.length === 9 && !winner
+    const isGameOver = !!winner || isDraw
 
    
     const handleSelectSquare = (rowIndex : number, colIndex : number) => {
+        if(gameBoard[rowIndex][colIndex] || isGameOver) return
 
         setGameTurns(prevTurns => {
             let currentPlayer = derivedActivePlayer(prevTurns)
@@ -132,7 +134,7 @@ export default function App(){
         <GameBoard 
         handleSelectSquare={handleSelectSquare} 
         gameBoard={gameBoard} />
-
+        
         <Log gameTurns = {gameTurns}/>
         </div>
         </main>
